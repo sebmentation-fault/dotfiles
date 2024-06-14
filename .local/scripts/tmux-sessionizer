@@ -10,23 +10,18 @@ if [[ -z $selected ]]; then
     exit 0
 fi
 
-session_name=$(basename "$selected" | tr . _)
+selected_name=$(basename "$selected" | tr . _)
 is_tmux_running=$(pgrep tmux)
 
-# if it is running, then jump into it
+# if it is not running, then we need to create it
 if [[ -z $TMUX ]] && [[ -z $is_tmux_running ]]; then
-    echo "tmux is running... creating new session"
     tmux new-session -s $selected_name -c $selected
-    echo "created... you shouldve jumped to it by now"
     exit 0
 fi
 
+# tmux is running, but there is not a session with our name, then create it
 if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    echo "the session for the $selected_name doesn't exist yet... creating session"
     tmux new-session -ds $selected_name -c $selected
-    echo "created and switching now"
-else
-    echo "the session for $selected_name already exists! jumping to it now"
 fi
 
 tmux switch-client -t $selected_name
