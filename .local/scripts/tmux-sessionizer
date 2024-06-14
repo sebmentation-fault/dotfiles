@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# NOTE: Thanks to ThePrimeagen:
+#   [repo](https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer)
+
+selected=$(find ~ ~/personal -mindepth 1 -maxdepth 1 -type d | fzf)
+
+# if the selected is empty, then exit
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+session_name=$(basename "$selected" | tr . _)
+is_tmux_running=$(pgrep tmux)
+
+# if it is running, then jump into it
+if [[ -z $TMUX ]] && [[ -z $is_tmux_running ]]; then
+    echo "tmux is running... creating new session"
+    tmux new-session -s $selected_name -c $selected
+    echo "created... you shouldve jumped to it by now"
+    exit 0
+fi
+
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    echo "the session for the $selected_name doesn't exist yet... creating session"
+    tmux new-session -ds $selected_name -c $selected
+    echo "created and switching now"
+else
+    echo "the session for $selected_name already exists! jumping to it now"
+fi
+
+tmux switch-client -t $selected_name
