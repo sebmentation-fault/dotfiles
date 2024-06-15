@@ -18,7 +18,7 @@ add_to_path() {
 }
 
 # custom scripts i made
-add_to_path $HOME/.local/scripts/
+add_to_path $HOME/.local/bin/
 # add gopls, gofmt, and utils like air to the path 
 add_to_path /usr/local/go/bin/
 add_to_path $GOPATH/bin/
