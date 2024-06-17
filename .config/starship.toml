@@ -22,6 +22,10 @@ vicmd_symbol = "[❰](cyan)"
 format = '[(\($virtualenv\) )]($style)'
 style = 'white'
 
+[ruby]
+# disable ruby (on macos this always shows because i tell chruby to load in a special ruby version)
+disabled = true
+
 [directory]
 style = "blue"
 truncation_length = 1
