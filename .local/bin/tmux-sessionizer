@@ -3,7 +3,7 @@
 # NOTE: Thanks to ThePrimeagen:
 #   [repo](https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer)
 
-selected=$(find ~ ~/personal -mindepth 1 -maxdepth 1 -type d | fzf)
+selected=$(find ~ ~/personal ~/work -mindepth 1 -maxdepth 1 -type d | fzf)
 
 # if the selected is empty, then exit
 if [[ -z $selected ]]; then

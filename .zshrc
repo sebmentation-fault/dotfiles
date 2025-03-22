@@ -1,4 +1,5 @@
 # source zsh completions
+fpath+=~/.zfunc
 source $HOME/.config/zsh/completion.zsh
 source <(fzf --zsh)
 
@@ -16,3 +17,10 @@ setopt HIST_SAVE_NO_DUPS
 # starship prompt
 eval "$(starship init zsh)"
 
+# pnpm
+export PNPM_HOME="/Users/sebastiankjallgren/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

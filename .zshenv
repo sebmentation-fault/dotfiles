@@ -17,11 +17,16 @@ add_to_path() {
     fi
 }
 
+# add_to_path $HOME/work/elandi-mock/mock-env/bin/python
+
 # custom scripts i made
 add_to_path $HOME/.local/bin/
 # add gopls, gofmt, and utils like air to the path 
 add_to_path /usr/local/go/bin/
 add_to_path $GOPATH/bin/
+# this is to stop homebrew throwing warnings
+add_to_path /usr/local/sbin/
+
 
 #  source/load rust/cargo environment variables
 . "$HOME/.cargo/env"
